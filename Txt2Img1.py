@@ -22,3 +22,10 @@ output_dir = "ImgOutput/"
 pipeline = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5")
 pipeline.scheduler = EulerDiscreteScheduler.from_config(pipeline.scheduler.config)
 
+# Generate an image from a text prompt
+text_prompt = "An apple"
+generated_image = pipeline(text_prompt)
+
+plt.imshow(generated_image)
+plt.axis("off")
+plt.show()
