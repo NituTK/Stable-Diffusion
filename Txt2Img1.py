@@ -19,13 +19,16 @@ output_dir = "ImgOutput/"
 # Create a Stable Diffusion pipeline
 #pipeline = StableDiffusionPipeline()
 #pipeline = StableDiffusionPipeline.from_pretrained('CompVis/stable-diffusion-v1-4').to('cuda')
-pipeline = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5")
+pipeline = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5",torch_dtype=torch.float16)
 pipeline.scheduler = EulerDiscreteScheduler.from_config(pipeline.scheduler.config)
 
 # Generate an image from a text prompt
 text_prompt = "An apple"
-generated_image = pipeline(text_prompt)
+generated_image = pipeline(text_prompt).images[0]
+generated_image.save("appleout.png")
 
-plt.imshow(generated_image)
-plt.axis("off")
-plt.show()
+
+
+# plt.imshow(generated_image)
+# plt.axis("off")
+# plt.show()
